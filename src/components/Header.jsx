@@ -4,7 +4,10 @@ const Title = styled.span`
     font-family: 'Poppins', sans-serif;
     color: white;
     font-size: 2rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
     margin-left: 30px;
+    cursor: pointer;
 `
 
 const HeaderContainer = styled.div`
