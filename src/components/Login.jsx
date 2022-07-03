@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setPassword, setEmail } from '../app/Data'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from '../firebase/FirebaseConfig'
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
     display: flex;
@@ -123,6 +124,7 @@ const Login = () => {
     const password = useSelector(state => state.data.password)
     const auth = getAuth();
     let isAuth = false
+    const navigate = useNavigate()
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -136,9 +138,12 @@ const Login = () => {
                 dispatch(setEmail(''))
                 console.log('Login success')
                 console.log(email, password)
+                navigate('/app')
             }
         })
         .catch((error) => {
+            dispatch(setPassword(''))
+            dispatch(setEmail(''))
             console.error(error)
         });   
     }
