@@ -5,6 +5,8 @@ import { setPassword, setEmail } from '../app/Data'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from '../firebase/FirebaseConfig'
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Container = styled.div`
     display: flex;
@@ -15,6 +17,10 @@ const Container = styled.div`
 
 const LoginContainer = styled.div`
     width: 40vw;
+
+    @media (max-width: 768px) {
+     width: 90vw;    
+    }
 `
 const FormConteiner = styled.div`
     border: 1px solid hsla(0, 0%, 65%, 0.158);
@@ -27,11 +33,17 @@ const FormConteiner = styled.div`
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
+
+    @media (max-width: 768px) {
+        padding: 2rem;
+    }
 `
 
 const LoginText = styled.h2`
-    font-size: 2rem;
+    font-size: 2.3rem;
     color: white;
+    font-family: "Poppins", sans-serif;
+    opacity: 0.6;
 `
 
 const Input = styled.input`
@@ -51,12 +63,6 @@ const Input = styled.input`
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
-
-    :focus {
-        box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.2);
-        animation: wobble 0.3s ease-in;
-        -webkit-animation: wobble 0.3s ease-in;
-    }
 `
 
 const SubmitButton = styled.button`
@@ -81,15 +87,6 @@ const SubmitButton = styled.button`
     -moz-transition: all 0.1s ease-in-out;
     -ms-transition: all 0.1s ease-in-out;
     -o-transition: all 0.1s ease-in-out;
-
-    :hover {
-        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
-        transform: scale(1.02);
-        -webkit-transform: scale(1.02);
-        -moz-transform: scale(1.02);
-        -ms-transform: scale(1.02);
-        -o-transform: scale(1.02);
-    }
 `
 
 const LoginForm = styled.form`
@@ -101,7 +98,7 @@ const LoginForm = styled.form`
 
 const SingGoogle = styled.button`
     cursor: pointer;
-    background-image: linear-gradient(to right, #efe6f7 0%, #bbb9bd 50%, #908e91 100%);
+    background-image: #fff;
     color: black;
     padding: 13px;
     border-radius: 10px;
@@ -109,11 +106,62 @@ const SingGoogle = styled.button`
     font-size: 20px;
     letter-spacing: 1.5px;
     font-weight: bold;
-    width: 80%;
+    width: 65%;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
+`
+const Circle1 = styled.div`
+    width: 8.5rem;
+    height: 8.5rem;
+    background: linear-gradient(to right, #A149FA 0%, #ab62f5 50%, #c496f2 100%);
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    position: relative;
+    top: 130px;
+    left: 0;
+    transform: translate(-45%, -45%);
+    -webkit-transform: translate(-45%, -45%);
+    -moz-transform: translate(-45%, -45%);
+    -ms-transform: translate(-45%, -45%);
+    -o-transform: translate(-45%, -45%);
+
+    @media (max-width: 768px) {
+        display: none;
+    }
+`
+
+const SingUp = styled.span`
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+    margin-top: 20px;
+`
+
+const Circle2 = styled.div`
+    width: 8rem;
+    height: 8rem;
+    background: linear-gradient(to right, #c496f2 0%, #ab62f5 50%, #A149FA 100%);
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    position: relative;
+    bottom: 110px;
+    right: -80%;
+    transform: translate(45%, 45%);
+    -webkit-transform: translate(45%, 45%);
+    -moz-transform: translate(45%, 45%);
+    -ms-transform: translate(45%, 45%);
+    -o-transform: translate(45%, 45%);
+
+    @media (max-width: 768px) {
+        display: none;
+    }
 `
 
 
@@ -125,6 +173,7 @@ const Login = () => {
     const auth = getAuth();
     let isAuth = false
     const navigate = useNavigate()
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -145,21 +194,26 @@ const Login = () => {
             dispatch(setPassword(''))
             dispatch(setEmail(''))
             console.error(error)
+            toast.error("Login failed")
         });   
     }
 
     return (
         <Container>
+            <ToastContainer icon={true} newestOnTop={true} theme="dark" />
             <LoginContainer>
+                <Circle1></Circle1>
                 <FormConteiner>
                     <LoginText>Login</LoginText>
                     <LoginForm>
                         <Input type="text" name="email" placeholder="Email" onChange={(e) => dispatch(setEmail(e.target.value))}/>
                         <Input type="password" name="password" placeholder="Password" onChange={(e) => dispatch(setPassword(e.target.value))} />
                         <SubmitButton onClick={(e) => handleSubmit(e)}>ACCEDI</SubmitButton>
-                        <SingGoogle>Sing with Google <Icon icon="akar-icons:google-fill" width="35" height="35" /> </SingGoogle>
+                        <SingGoogle>Accedi con Google<Icon icon="logos:google-icon" width="35" height="35" /> </SingGoogle>
+                        <SingUp>Oppure Registrati</SingUp>
                     </LoginForm>
                 </FormConteiner>
+                <Circle2></Circle2>
             </LoginContainer>
         </Container>
     )
