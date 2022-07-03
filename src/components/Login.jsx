@@ -1,10 +1,11 @@
 import styled from 'styled-components'
+import { Icon } from '@iconify/react';
 
 const Container = styled.div`
     display: flex;
-    align-items: center;
-    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    height: 70vh;
 `
 
 const LoginContainer = styled.div`
@@ -45,15 +46,21 @@ const Input = styled.input`
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
+
+    :focus {
+        box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.2);
+        animation: wobble 0.3s ease-in;
+        -webkit-animation: wobble 0.3s ease-in;
+    }
 `
 
 const SubmitButton = styled.button`
-    background-color: #0f3460;
+    background-image: linear-gradient(to right, #A149FA 0%, #ab62f5 50%, #c496f2 100%);
     color: #ffffff;
     padding: 13px;
     border-radius: 5px;
     outline: none;
-    font-size: 18px;
+    font-size: 20px;
     letter-spacing: 1.5px;
     font-weight: bold;
     width: 100%;
@@ -69,6 +76,15 @@ const SubmitButton = styled.button`
     -moz-transition: all 0.1s ease-in-out;
     -ms-transition: all 0.1s ease-in-out;
     -o-transition: all 0.1s ease-in-out;
+
+    :hover {
+        box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
+        transform: scale(1.02);
+        -webkit-transform: scale(1.02);
+        -moz-transform: scale(1.02);
+        -ms-transform: scale(1.02);
+        -o-transform: scale(1.02);
+    }
 `
 
 const LoginForm = styled.form`
@@ -76,6 +92,23 @@ const LoginForm = styled.form`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+`
+
+const SingGoogle = styled.button`
+    cursor: pointer;
+    background-image: linear-gradient(to right, #efe6f7 0%, #bbb9bd 50%, #908e91 100%);
+    color: black;
+    padding: 13px;
+    border-radius: 10px;
+    outline: none;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 `
 
 
@@ -87,9 +120,10 @@ const Login = () => {
                 <FormConteiner>
                     <LoginText>Login</LoginText>
                     <LoginForm>
-                        <Input type="text" placeholder="USERNAME" />
-                        <Input type="password" placeholder="PASSWORD" />
-                        <SubmitButton class="opacity">SUBMIT</SubmitButton>
+                        <Input type="text" name="email" placeholder="Email" />
+                        <Input type="password" name="password" placeholder="Password" />
+                        <SubmitButton>SUBMIT</SubmitButton>
+                        <SingGoogle>Sing with Google <Icon icon="akar-icons:google-fill" width="35" height="35" /> </SingGoogle>
                     </LoginForm>
                 </FormConteiner>
             </LoginContainer>
