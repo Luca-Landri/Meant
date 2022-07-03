@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
 const Title = styled.span`
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Pacifico', sans-serif;
     color: white;
-    font-size: 2rem;
+    font-size: 2.2rem;
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 30px;
@@ -21,7 +21,7 @@ const HeaderContainer = styled.div`
 const Header = () => {
     return(
         <HeaderContainer>
-            <Title> LANDRIGRAM </Title>
+            <Title> Landrigram </Title>
         </HeaderContainer>
     )
 }
