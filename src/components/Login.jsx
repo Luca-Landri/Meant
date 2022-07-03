@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import { Icon } from '@iconify/react';
+import { useSelector, useDispatch } from 'react-redux'
+import { setPassword, setEmail } from '../app/DataSlice'
 
 const Container = styled.div`
     display: flex;
@@ -114,6 +116,12 @@ const SingGoogle = styled.button`
 
 
 const Login = () => {
+    const dispatch = useDispatch()
+    const email = useSelector(state => state.data.email)
+    const password = useSelector(state => state.data.password)
+
+
+
     return (
         <Container>
             <LoginContainer>
