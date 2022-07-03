@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { Icon } from '@iconify/react';
 import { useSelector, useDispatch } from 'react-redux'
 import { setPassword, setEmail } from '../app/Data'
+import { useEffect } from 'react';
 
 const Container = styled.div`
     display: flex;
@@ -120,7 +121,10 @@ const Login = () => {
     const email = useSelector(state => state.data.email)
     const password = useSelector(state => state.data.password)
 
-
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(email, password)
+    }
 
     return (
         <Container>
@@ -128,9 +132,9 @@ const Login = () => {
                 <FormConteiner>
                     <LoginText>Login</LoginText>
                     <LoginForm>
-                        <Input type="text" name="email" placeholder="Email" />
-                        <Input type="password" name="password" placeholder="Password" />
-                        <SubmitButton>SUBMIT</SubmitButton>
+                        <Input type="text" name="email" placeholder="Email" onChange={(e) => dispatch(setEmail(e.target.value))}/>
+                        <Input type="password" name="password" placeholder="Password" onChange={(e) => dispatch(setPassword(e.target.value))} />
+                        <SubmitButton onClick={(e) => handleSubmit(e)}>SUBMIT</SubmitButton>
                         <SingGoogle>Sing with Google <Icon icon="akar-icons:google-fill" width="35" height="35" /> </SingGoogle>
                     </LoginForm>
                 </FormConteiner>
