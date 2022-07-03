@@ -2,7 +2,8 @@ import styled from 'styled-components'
 import { Icon } from '@iconify/react';
 import { useSelector, useDispatch } from 'react-redux'
 import { setPassword, setEmail } from '../app/Data'
-import { useEffect } from 'react';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { app } from '../firebase/FirebaseConfig'
 
 const Container = styled.div`
     display: flex;
@@ -120,10 +121,26 @@ const Login = () => {
     const dispatch = useDispatch()
     const email = useSelector(state => state.data.email)
     const password = useSelector(state => state.data.password)
+    const auth = getAuth();
+    let isAuth = false
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(email, password)
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            console.log(userCredential)
+            isAuth = true
+        }).then(() => {
+            if (isAuth) {
+                dispatch(setPassword(''))
+                dispatch(setEmail(''))
+                console.log('Login success')
+                console.log(email, password)
+            }
+        })
+        .catch((error) => {
+            console.error(error)
+        });   
     }
 
     return (
@@ -134,7 +151,7 @@ const Login = () => {
                     <LoginForm>
                         <Input type="text" name="email" placeholder="Email" onChange={(e) => dispatch(setEmail(e.target.value))}/>
                         <Input type="password" name="password" placeholder="Password" onChange={(e) => dispatch(setPassword(e.target.value))} />
-                        <SubmitButton onClick={(e) => handleSubmit(e)}>SUBMIT</SubmitButton>
+                        <SubmitButton onClick={(e) => handleSubmit(e)}>ACCEDI</SubmitButton>
                         <SingGoogle>Sing with Google <Icon icon="akar-icons:google-fill" width="35" height="35" /> </SingGoogle>
                     </LoginForm>
                 </FormConteiner>
