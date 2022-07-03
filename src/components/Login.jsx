@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Icon } from '@iconify/react';
 import { useSelector, useDispatch } from 'react-redux'
-import { setPassword, setEmail } from '../app/DataSlice'
+import { setPassword, setEmail } from '../app/Data'
 
 const Container = styled.div`
     display: flex;

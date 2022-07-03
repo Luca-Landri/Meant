@@ -21,4 +21,4 @@ export const dataSlice = createSlice({
 })
 
 export default dataSlice.reducer
-export const { setPassword, setEmail } = counterSlice.actions
+export const { setPassword, setEmail } = dataSlice.actions
