@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
 
 const Title = styled.span`
     font-family: 'Pacifico', sans-serif;
@@ -19,13 +20,35 @@ const HeaderContainer = styled.div`
     display: flex;
     justify-content: left;
     box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+`
+
+const Propic = styled.img`
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    margin-right: 40px;
+    box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.2);
+    border: 3px solid hsla(0, 0%, 65%, 0.158);
+
+    @media (max-width: 768px) {
+        width: 45px;
+        height: 45px;
+    }
 `
 
 
 const Header = () => {
+
+    const img = useSelector(state => state.data.img)
+
     return(
         <HeaderContainer>
             <Title> Landrigram </Title>
+            <Propic src={img}/>
         </HeaderContainer>
     )
 }

@@ -23,7 +23,7 @@ const LoginContainer = styled.div`
 
     @media (max-width: 768px) {
         width: 90vw;  
-        height: 30vh;
+        height: 45vh;
     }
 `
 const FormConteiner = styled.div`
@@ -196,6 +196,27 @@ const Register = styled(Link)`
     color: #fff;
 `
 
+const Title = styled.span`
+    font-family: 'Pacifico', sans-serif;
+    color: white;
+    font-size: 2.2rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 30px;
+    cursor: pointer;
+
+    @media (max-width: 768px) {
+        font-size: 1.5rem;
+    }
+`
+
+const HeaderContainer = styled.div`
+    border-bottom: 1px solid hsla(0, 0%, 65%, 0.158);
+    display: flex;
+    justify-content: left;
+    box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.2);
+`
+
 
 
 const Login = () => {
@@ -258,7 +279,11 @@ const Login = () => {
     }
 
     return (
-        <Container>
+        <div>
+            <HeaderContainer>
+                <Title> Landrigram </Title>
+            </HeaderContainer>
+            <Container>
             <ToastContainer icon={true} newestOnTop={true} theme="dark" />
             <LoginContainer>
                 <Circle1></Circle1>
@@ -275,7 +300,8 @@ const Login = () => {
                 <Circle2></Circle2>
             </LoginContainer>
             <Blob src={blob} alt="" />
-        </Container>
+            </Container>
+        </div>
     )
 }
 
