@@ -223,7 +223,6 @@ const Login = () => {
             if (isAuth) {
                 dispatch(setPassword(''))
                 dispatch(setEmail(''))
-                toast.success("Logged In")
                 console.log(email, password)
                 navigate('/app')
             }
@@ -232,7 +231,7 @@ const Login = () => {
             dispatch(setPassword(''))
             dispatch(setEmail(''))
             console.error(error)
-            toast.error("Login failed")
+            toast.error("Login failed, try a different account")
             isAuth = false
             console.log(email, password)
         });   
@@ -242,14 +241,15 @@ const Login = () => {
         e.preventDefault()
         signInWithPopup(auth, provider)
         .then((result) => {
+            const user = result.user
+            console.log(user.photoURL)
             isAuth = true
         }).then(() => {
             if (isAuth) {
                 navigate('/app')
-                toast.success("Logged In")
             }
         }).catch((error) => {
-            toast.error("Login failed")
+            toast.error("Login failed, try a different account")
             isAuth = false
         });
     }
