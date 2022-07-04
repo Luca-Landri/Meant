@@ -8,6 +8,10 @@ const Title = styled.span`
     margin-bottom: 10px;
     margin-left: 30px;
     cursor: pointer;
+
+    @media (max-width: 768px) {
+        font-size: 1.5rem;
+    }
 `
 
 const HeaderContainer = styled.div`
