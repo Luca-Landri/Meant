@@ -1,5 +1,9 @@
 const Register = (props) => {
-    return (<></>)
+    return (
+        <div>
+            No fra il cazzo
+        </div>
+    )
 }
 
 export default Register;

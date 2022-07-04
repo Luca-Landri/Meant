@@ -9,6 +9,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import blob from '../../assets/blob.png'
 import { provider } from '../firebase/FirebaseConfig'
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
     display: flex;
@@ -153,6 +154,7 @@ const SingUp = styled.span`
     color: #fff;
     font-family: "Poppins", sans-serif;
     margin-top: 20px;
+    opacity: 0.6;
 `
 
 const Circle2 = styled.div`
@@ -187,6 +189,10 @@ const Blob = styled.img`
     @media (max-width: 768px) {
         display: none;
     }
+`
+
+const Register = styled(Link)`
+    color: #fff;
 `
 
 
@@ -260,7 +266,7 @@ const Login = () => {
                         <Input type="password" name="password" placeholder="Password" onChange={(e) => dispatch(setPassword(e.target.value))} />
                         <SubmitButton onClick={(e) => handleSubmit(e)}>ACCEDI</SubmitButton>
                         <SingGoogle onClick={(e) => {handleGoogleSignIn(e)}}>Accedi con<Icon icon="logos:google-icon" width="40" height="40" /> </SingGoogle>
-                        <SingUp>Oppure Registrati</SingUp>
+                        <SingUp>Oppure  <Register to="/register" >Registrati</Register></SingUp>
                     </LoginForm>
                 </FormConteiner>
                 <Circle2></Circle2>
