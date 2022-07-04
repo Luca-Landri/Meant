@@ -22,7 +22,8 @@ const LoginContainer = styled.div`
     width: 40vw;
 
     @media (max-width: 768px) {
-        width: 90vw;    
+        width: 90vw;  
+        height: 30vh;
     }
 `
 const FormConteiner = styled.div`
