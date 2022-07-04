@@ -21,7 +21,7 @@ const LoginContainer = styled.div`
     width: 40vw;
 
     @media (max-width: 768px) {
-     width: 90vw;    
+        width: 90vw;    
     }
 `
 const FormConteiner = styled.div`
@@ -38,6 +38,8 @@ const FormConteiner = styled.div`
 
     @media (max-width: 768px) {
         padding: 2rem;
+        backdrop-filter: blur(0px);
+        border: none;
     }
 `
 
@@ -65,6 +67,12 @@ const Input = styled.input`
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
+
+    @media (max-width: 768px) {
+        backdrop-filter: blur(0px);
+        
+    }
+
 `
 
 const SubmitButton = styled.button`
@@ -89,6 +97,8 @@ const SubmitButton = styled.button`
     -moz-transition: all 0.1s ease-in-out;
     -ms-transition: all 0.1s ease-in-out;
     -o-transition: all 0.1s ease-in-out;
+
+    
 `
 
 const LoginForm = styled.form`
@@ -249,7 +259,7 @@ const Login = () => {
                         <Input type="text" name="email" placeholder="Email" onChange={(e) => dispatch(setEmail(e.target.value))}/>
                         <Input type="password" name="password" placeholder="Password" onChange={(e) => dispatch(setPassword(e.target.value))} />
                         <SubmitButton onClick={(e) => handleSubmit(e)}>ACCEDI</SubmitButton>
-                        <SingGoogle onClick={(e) => {handleGoogleSignIn(e)}}>Accedi con Google<Icon icon="logos:google-icon" width="35" height="35" /> </SingGoogle>
+                        <SingGoogle onClick={(e) => {handleGoogleSignIn(e)}}>Accedi con<Icon icon="logos:google-icon" width="40" height="40" /> </SingGoogle>
                         <SingUp>Oppure Registrati</SingUp>
                     </LoginForm>
                 </FormConteiner>
