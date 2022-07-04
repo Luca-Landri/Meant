@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Icon } from '@iconify/react';
 import { useSelector, useDispatch } from 'react-redux'
-import { setPassword, setEmail } from '../app/Data'
+import { setPassword, setEmail, setImg } from '../app/Data'
 import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from '../firebase/FirebaseConfig'
 import { useNavigate } from 'react-router-dom';
@@ -201,6 +201,7 @@ const Login = () => {
     const dispatch = useDispatch()
     const email = useSelector(state => state.data.email)
     const password = useSelector(state => state.data.password)
+    const img = useSelector(state => state.data.img)
     const auth = getAuth();
     let isAuth = false
     const navigate = useNavigate()
@@ -211,7 +212,6 @@ const Login = () => {
     provider.setCustomParameters({
         'login_hint': 'user@example.com'
     });
-
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -244,6 +244,8 @@ const Login = () => {
             const user = result.user
             console.log(user.photoURL)
             isAuth = true
+            dispatch(setImg(user.photoURL))
+            
         }).then(() => {
             if (isAuth) {
                 navigate('/app')
@@ -266,7 +268,7 @@ const Login = () => {
                         <Input type="password" name="password" placeholder="Password" onChange={(e) => dispatch(setPassword(e.target.value))} />
                         <SubmitButton onClick={(e) => handleSubmit(e)}>ACCEDI</SubmitButton>
                         <SingGoogle onClick={(e) => {handleGoogleSignIn(e)}}>Accedi con<Icon icon="logos:google-icon" width="40" height="40" /> </SingGoogle>
-                        <SingUp>Oppure  <Register to="/register" >Registrati</Register></SingUp>
+                        <SingUp>Oppure  <Register to="/register">Registrati</Register></SingUp>
                     </LoginForm>
                 </FormConteiner>
                 <Circle2></Circle2>
