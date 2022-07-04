@@ -2,11 +2,13 @@ import styled from 'styled-components'
 import { Icon } from '@iconify/react';
 import { useSelector, useDispatch } from 'react-redux'
 import { setPassword, setEmail } from '../app/Data'
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from '../firebase/FirebaseConfig'
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import blob from '../../assets/blob.png'
+import { provider } from '../firebase/FirebaseConfig'
 
 const Container = styled.div`
     display: flex;
@@ -112,6 +114,8 @@ const SingGoogle = styled.button`
     align-items: center;
     gap: 15px;
 `
+
+
 const Circle1 = styled.div`
     width: 8.5rem;
     height: 8.5rem;
@@ -163,6 +167,17 @@ const Circle2 = styled.div`
         display: none;
     }
 `
+const Blob = styled.img`
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: rotatey(180deg);
+    width: 20%;
+
+    @media (max-width: 768px) {
+        display: none;
+    }
+`
 
 
 
@@ -173,6 +188,13 @@ const Login = () => {
     const auth = getAuth();
     let isAuth = false
     const navigate = useNavigate()
+
+    auth.languageCode = 'it';
+    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+
+    provider.setCustomParameters({
+        'login_hint': 'user@example.com'
+    });
 
 
     const handleSubmit = (e) => {
@@ -185,7 +207,7 @@ const Login = () => {
             if (isAuth) {
                 dispatch(setPassword(''))
                 dispatch(setEmail(''))
-                console.log('Login success')
+                toast.success("Logged In")
                 console.log(email, password)
                 navigate('/app')
             }
@@ -195,7 +217,25 @@ const Login = () => {
             dispatch(setEmail(''))
             console.error(error)
             toast.error("Login failed")
+            isAuth = false
+            console.log(email, password)
         });   
+    }
+    
+    const handleGoogleSignIn = (e) => {
+        e.preventDefault()
+        signInWithPopup(auth, provider)
+        .then((result) => {
+            isAuth = true
+        }).then(() => {
+            if (isAuth) {
+                navigate('/app')
+                toast.success("Logged In")
+            }
+        }).catch((error) => {
+            toast.error("Login failed")
+            isAuth = false
+        });
     }
 
     return (
@@ -209,12 +249,13 @@ const Login = () => {
                         <Input type="text" name="email" placeholder="Email" onChange={(e) => dispatch(setEmail(e.target.value))}/>
                         <Input type="password" name="password" placeholder="Password" onChange={(e) => dispatch(setPassword(e.target.value))} />
                         <SubmitButton onClick={(e) => handleSubmit(e)}>ACCEDI</SubmitButton>
-                        <SingGoogle>Accedi con Google<Icon icon="logos:google-icon" width="35" height="35" /> </SingGoogle>
+                        <SingGoogle onClick={(e) => {handleGoogleSignIn(e)}}>Accedi con Google<Icon icon="logos:google-icon" width="35" height="35" /> </SingGoogle>
                         <SingUp>Oppure Registrati</SingUp>
                     </LoginForm>
                 </FormConteiner>
                 <Circle2></Circle2>
             </LoginContainer>
+            <Blob src={blob} alt="" />
         </Container>
     )
 }
