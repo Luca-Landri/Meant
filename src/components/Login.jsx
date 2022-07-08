@@ -99,6 +99,8 @@ const SubmitButton = styled.button`
     -moz-transition: all 0.1s ease-in-out;
     -ms-transition: all 0.1s ease-in-out;
     -o-transition: all 0.1s ease-in-out;
+
+    
 `
 
 const LoginForm = styled.form`
