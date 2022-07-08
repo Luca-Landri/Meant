@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Icon } from '@iconify/react';
 import { useSelector, useDispatch } from 'react-redux'
-import { setPassword, setEmail, setImg } from '../app/Data'
+import { setPassword, setEmail, setImg, setName } from '../app/Data'
 import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from '../firebase/FirebaseConfig'
 import { useNavigate } from 'react-router-dom';
@@ -262,9 +262,10 @@ const Login = () => {
         signInWithPopup(auth, provider)
         .then((result) => {
             const user = result.user
-            console.log(user.photoURL)
+            console.log(user)
             isAuth = true
             dispatch(setImg(user.photoURL))
+            dispatch(setName(user.displayName))
         }).then(() => {
             if (isAuth) {
                 navigate('/app')
