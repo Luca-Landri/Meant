@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setEmail, setPassword, setPassword2 } from '../app/Register'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 
 const Container = styled.div`
@@ -126,7 +127,7 @@ const Register = () => {
     const password = useSelector((state) => state.register.password)
     const password2 = useSelector((state) => state.register.password2)
     const dispatch = useDispatch()
-
+    const navigate = useNavigate()
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -140,6 +141,7 @@ const Register = () => {
                 dispatch(setEmail(''))
                 dispatch(setPassword(''))
                 dispatch(setPassword2(''))
+                navigate('/app')
             })
             .catch((error) => {
                 const errorCode = error.code;
