@@ -265,7 +265,6 @@ const Login = () => {
             console.log(user.photoURL)
             isAuth = true
             dispatch(setImg(user.photoURL))
-            
         }).then(() => {
             if (isAuth) {
                 navigate('/app')
