@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import { Icon } from '@iconify/react';
+import { useSelector, useDispatch } from 'react-redux'
+import { setFormOpened } from '../app/Post';
 
 const Container = styled.div`
     position: absolute;
@@ -27,11 +29,15 @@ const NavbarRow = styled.div`
 
 
 const Navbar = () => {
+
+    const dispatch = useDispatch()
+    const formOpened = useSelector((state) => state.post.formOpened)
+
     return (
         <Container>
             <NavbarRow>
                 <Icon icon="ant-design:home-filled" color="white" width="34" height="34" />
-                <Icon icon="carbon:add-filled" color="white" width="34" height="34"/>
+                <Icon icon="carbon:add-filled" color="white" width="34" height="34" onClick={() => dispatch(setFormOpened(formOpened))}/>
                 <Icon icon="bx:user" color="white" width="34" height="34"/>
             </NavbarRow>
         </Container>
