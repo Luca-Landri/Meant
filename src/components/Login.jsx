@@ -1,15 +1,16 @@
+import { useState } from 'react';
 import styled from 'styled-components'
 import { Icon } from '@iconify/react';
 import { useSelector, useDispatch } from 'react-redux'
-import { setPassword, setEmail, setImg, setName } from '../app/Data'
-import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { app } from '../firebase/FirebaseConfig'
+import { signInGoogle, NormalSingIn } from '../app/data'
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import blob from '../../assets/blob.png'
-import { provider } from '../firebase/FirebaseConfig'
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { bake_cookie, read_cookie } from 'sfcookies';
 
 const Container = styled.div`
     display: flex;
@@ -219,61 +220,46 @@ const HeaderContainer = styled.div`
 
 const Login = () => {
     const dispatch = useDispatch()
-    const email = useSelector(state => state.data.email)
-    const password = useSelector(state => state.data.password)
-    const img = useSelector(state => state.data.img)
-    const auth = getAuth();
-    let isAuth = false
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const isAuth = useSelector(state => state.data.isAuth)
     const navigate = useNavigate()
+    const name = useSelector ((state) => state.data.name)
+    const img = useSelector ((state) => state.data.img)
+    const nameCookie = read_cookie('name')
 
-    auth.languageCode = 'it';
-    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+    useEffect (() => {
+        if (isAuth) {
+            bake_cookie("img", img)
+            bake_cookie("name", name)
+            navigate('/app')
+        }
+    }, [isAuth])
 
-    provider.setCustomParameters({
-        'login_hint': 'user@example.com'
-    });
+    useEffect (() => {
+        if (nameCookie.length > 0) {
+            navigate('/app')
+        }
+    }, [])
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            console.log(userCredential)
-            isAuth = true
-        }).then(() => {
-            if (isAuth) {
-                dispatch(setPassword(''))
-                dispatch(setEmail(''))
-                console.log(email, password)
-                navigate('/app')
-            }
-        })
-        .catch((error) => {
-            dispatch(setPassword(''))
-            dispatch(setEmail(''))
-            console.error(error)
-            toast.error("Login failed, try a different account")
-            isAuth = false
-            console.log(email, password)
-        });   
+    const handleEmail = (e) => {
+        setEmail(e.target.value)
+        console.log(email)
     }
-    
-    const handleGoogleSignIn = (e) => {
+
+    const handlePassword = (e) => {
+        setPassword(e.target.value)
+    }
+
+    const gogleSingIn = (e) => {
         e.preventDefault()
-        signInWithPopup(auth, provider)
-        .then((result) => {
-            const user = result.user
-            console.log(user)
-            isAuth = true
-            dispatch(setImg(user.photoURL))
-            dispatch(setName(user.displayName))
-        }).then(() => {
-            if (isAuth) {
-                navigate('/app')
-            }
-        }).catch((error) => {
-            toast.error("Login failed, try a different account")
-            isAuth = false
-        });
+        dispatch(signInGoogle())
+
+    }
+
+    const normalSingIn = (e) => {
+        e.preventDefault()
+        dispatch(NormalSingIn(email, password))
     }
 
     return (
@@ -288,10 +274,10 @@ const Login = () => {
                 <FormConteiner>
                     <LoginText>Login</LoginText>
                     <LoginForm>
-                        <Input type="text" name="email" placeholder="Email" onChange={(e) => dispatch(setEmail(e.target.value))}/>
-                        <Input type="password" name="password" placeholder="Password" onChange={(e) => dispatch(setPassword(e.target.value))} />
-                        <SubmitButton onClick={(e) => handleSubmit(e)}>ACCEDI</SubmitButton>
-                        <SingGoogle onClick={(e) => {handleGoogleSignIn(e)}}>Accedi con<Icon icon="logos:google-icon" width="40" height="40" /> </SingGoogle>
+                        <Input type="text" name="email" placeholder="Email" onChange={(e) => handleEmail(e)}/>
+                        <Input type="password" name="password" placeholder="Password" onChange={(e) => handlePassword(e)} />
+                        <SubmitButton onClick={() => normalSingIn(e)}>ACCEDI</SubmitButton>
+                        <SingGoogle onClick={(e) => gogleSingIn(e)}>Accedi con<Icon icon="logos:google-icon" width="40" height="40" /> </SingGoogle>
                         <SingUp>Oppure  <Register to="/register">Registrati</Register></SingUp>
                     </LoginForm>
                 </FormConteiner>
@@ -304,3 +290,24 @@ const Login = () => {
 }
 
 export default Login
+
+
+    // const handleSubmit = (e) => {
+    //     e.preventDefault()
+    //     signInWithEmailAndPassword(auth, email, password)
+    //     .then((userCredential) => {
+    //         isAuth = true
+    //     }).then(() => {
+    //         if (isAuth) {
+    //             dispatch(setPassword(''))
+    //             dispatch(setEmail(''))
+    //             navigate('/app')
+    //         }
+    //     })
+    //     .catch((error) => {
+    //         dispatch(setPassword(''))
+    //         dispatch(setEmail(''))
+    //         toast.error("Login failed, try a different account")
+    //         isAuth = false
+    //     });   
+    // }
