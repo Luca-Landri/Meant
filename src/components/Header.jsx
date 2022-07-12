@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
+import { read_cookie } from 'sfcookies';
+
 
 const Title = styled.span`
     font-family: 'Pacifico', sans-serif;
@@ -44,11 +46,12 @@ const Propic = styled.img`
 const Header = () => {
 
     const img = useSelector(state => state.data.img)
+    const imgCookie = read_cookie("img")
 
     return(
         <HeaderContainer>
             <Title> Landrigram </Title>
-            <Propic src={img}/>
+            <Propic src={imgCookie}/>
         </HeaderContainer>
     )
 }
