@@ -9,4 +9,11 @@ export const store = configureStore({
     register: registerReducer,
     post: postReducer,
   },
+
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActionPaths: ["payload"],
+      },
+  }),
 })
