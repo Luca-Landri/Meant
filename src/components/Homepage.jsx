@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Homepage = () => {
-    const openForm = useSelector ((state) => state.post.formOpened)
+    const openForm = useSelector ((state) => state.app.formOpened)
     const dispatch = useDispatch()
     const nameCookie = read_cookie("name")
     const navigate = useNavigate()

@@ -21,4 +21,4 @@ export const appSlice = createSlice({
 })
 
 export default appSlice.reducer
-export const { setFormOpened } = appSlice.actions
+export const { setFormOpened, openDropdown } = appSlice.actions
