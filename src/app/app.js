@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   formOpened: false,
-  dropdownOpened: false,
+  dropdown: false,
 }
 
 export const appSlice = createSlice({
@@ -14,7 +14,7 @@ export const appSlice = createSlice({
     },
 
     openDropdown: (state) => {
-      state.dropdownOpened = !state.dropdownOpened
+      state.dropdown = !state.dropdown
     }
 
   },
