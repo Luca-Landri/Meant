@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { read_cookie } from 'sfcookies';
+import { useSelector, useDispatch } from 'react-redux';
+import { openDropdown } from '../app/app';
 
 
 const Title = styled.span`
@@ -47,11 +49,14 @@ const Header = () => {
 
     const img = useSelector(state => state.data.img)
     const imgCookie = read_cookie("img")
+    const dropdown = useSelector(state => state.app.dropdown)
+    const dispatch = useDispatch()
 
     return(
         <HeaderContainer>
             <Title> Landrigram </Title>
-            <Propic src={imgCookie}/>
+            <Propic src={imgCookie} onClick={() => {dispatch(openDropdown())}}/>
+            {dropdown ? <UserDropdown/> : null}
         </HeaderContainer>
     )
 }

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Icon } from '@iconify/react';
 import { useSelector, useDispatch } from 'react-redux'
-import { setFormOpened } from '../app/Post';
+import { setFormOpened } from '../app/app';
 
 const Container = styled.div`
     position: absolute;
@@ -31,7 +31,7 @@ const NavbarRow = styled.div`
 const Navbar = () => {
 
     const dispatch = useDispatch()
-    const formOpened = useSelector((state) => state.post.formOpened)
+    const formOpened = useSelector((state) => state.app.formOpened)
 
     return (
         <Container>

@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import dataReducer from "./Data"
 import registerReducer from "./Register"
-import postReducer from "./Post"
+import appReducer from "./app"
 
 export const store = configureStore({
   reducer: {
     data: dataReducer,
     register: registerReducer,
-    post: postReducer,
+    app: appReducer,
   },
 
   middleware: (getDefaultMiddleware) =>

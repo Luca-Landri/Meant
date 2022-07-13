@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components'
 import { Icon } from '@iconify/react';
 import { useSelector, useDispatch } from 'react-redux'
-import { signInGoogle, NormalSingIn } from '../app/data'
+import { signInGoogle, NormalSingIn } from '../app/Data';
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
