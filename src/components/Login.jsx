@@ -243,23 +243,30 @@ const Login = () => {
     }, [])
 
     const handleEmail = (e) => {
+        // Set the value of the email input to the value of the event target
         setEmail(e.target.value)
-        console.log(email)
     }
 
     const handlePassword = (e) => {
+        // Set the value of the password to the value of the input
         setPassword(e.target.value)
     }
 
     const gogleSingIn = (e) => {
+        // Prevent the default behavior of the form and start the process of signing in with Google
         e.preventDefault()
         dispatch(signInGoogle())
 
     }
 
     const normalSingIn = (e) => {
+
+        const data = {
+            email: email,
+            password: password
+        }
         e.preventDefault()
-        dispatch(NormalSingIn(email, password))
+        dispatch(NormalSingIn(data))
     }
 
     return (
@@ -276,7 +283,7 @@ const Login = () => {
                     <LoginForm>
                         <Input type="text" name="email" placeholder="Email" onChange={(e) => handleEmail(e)}/>
                         <Input type="password" name="password" placeholder="Password" onChange={(e) => handlePassword(e)} />
-                        <SubmitButton onClick={() => normalSingIn(e)}>ACCEDI</SubmitButton>
+                        <SubmitButton onClick={(e) => normalSingIn(e)}>ACCEDI</SubmitButton>
                         <SingGoogle onClick={(e) => gogleSingIn(e)}>Accedi con<Icon icon="logos:google-icon" width="40" height="40" /> </SingGoogle>
                         <SingUp>Oppure  <Register to="/register">Registrati</Register></SingUp>
                     </LoginForm>
@@ -290,24 +297,3 @@ const Login = () => {
 }
 
 export default Login
-
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault()
-    //     signInWithEmailAndPassword(auth, email, password)
-    //     .then((userCredential) => {
-    //         isAuth = true
-    //     }).then(() => {
-    //         if (isAuth) {
-    //             dispatch(setPassword(''))
-    //             dispatch(setEmail(''))
-    //             navigate('/app')
-    //         }
-    //     })
-    //     .catch((error) => {
-    //         dispatch(setPassword(''))
-    //         dispatch(setEmail(''))
-    //         toast.error("Login failed, try a different account")
-    //         isAuth = false
-    //     });   
-    // }
