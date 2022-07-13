@@ -18,19 +18,25 @@ const initialState = {
   isAuth: false,
 }
 
-export const signInGoogle = createAsyncThunk('signInGoogle', async () => {
+export const signInGoogle = createAsyncThunk('signInGoogle', async (arg, {rejectWithValue}) => {
     return signInWithPopup(getAuth(), provider).then(res => {
       return res.user
     }).catch (err => {
-      toast.error(err.message)
+      return rejectWithValue({
+            status: err.code,
+            message: err.message
+        })
     })
 })
 
-export const NormalSingIn = createAsyncThunk('NormalSingIn', async (email, password) => {
-    return signInWithEmailAndPassword(getAuth(), email, password).then(res => {
-      return res.user
+export const NormalSingIn = createAsyncThunk('NormalSingIn', async (data, {rejectWithValue}) => {
+    return signInWithEmailAndPassword(getAuth(), data.email, data.password).then(res => {
+      return res
     }).catch (err => {
-      toast.error(err.message)
+        return rejectWithValue({
+            status: err.code,
+            message: err.message
+        })
     })
 })
 
@@ -47,8 +53,6 @@ export const dataSlice = createSlice({
         state.img = action.payload.photoURL
         state.isAuth = true
         state.email = action.payload.email
-        console.log(state.email)
-        console.log(state.isAuth)
     }),
     builder.addCase(signInGoogle.rejected, (state, action) => {
         toast.error("Login failed, try a different account")
@@ -57,10 +61,7 @@ export const dataSlice = createSlice({
 
     builder.addCase(NormalSingIn.fulfilled, (state, action) => {
         state.isAuth = true
-        state.email = action.payload.email
-        console.log(state.email)
-        console.log(state.isAuth)
-        state.password = action.payload.password
+        console.log(action.payload)
     }),
 
     builder.addCase(NormalSingIn.rejected, (state, action) => {
