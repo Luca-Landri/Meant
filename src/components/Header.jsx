@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import { read_cookie } from 'sfcookies';
 import { useSelector, useDispatch } from 'react-redux';
 import { openDropdown } from '../app/app';
+import { useEffect } from 'react';
+import UserDropdown from './UserDropdown';
 
 
 const Title = styled.span`
@@ -30,8 +32,8 @@ const HeaderContainer = styled.div`
 `
 
 const Propic = styled.img`
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     margin-right: 40px;
     box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.2);
@@ -46,15 +48,14 @@ const Propic = styled.img`
 
 const Header = () => {
 
-    const img = useSelector(state => state.data.img)
     const imgCookie = read_cookie("img")
     const dropdown = useSelector(state => state.app.dropdown)
     const dispatch = useDispatch()
-
+    
     return(
         <HeaderContainer>
             <Title> Landrigram </Title>
-            <Propic src={imgCookie} onClick={() => {dispatch(openDropdown())}}/>
+            <Propic src={imgCookie} onClick={(e) => {dispatch(openDropdown(e))}}/>
             {dropdown ? <UserDropdown/> : null}
         </HeaderContainer>
     )
