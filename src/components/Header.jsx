@@ -33,8 +33,8 @@ const HeaderContainer = styled.div`
 `
 
 const Propic = styled.img`
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.2);
     border: 3px solid hsla(0, 0%, 65%, 0.158);
@@ -64,7 +64,7 @@ const Header = () => {
             <Title> Landrigram </Title>
             <UserContainer onClick={(e) => {dispatch(openDropdown(e))}}>
                 <Propic src={imgCookie}/>
-                <Icon icon="gridicons:dropdown" color='white' width="35px" height="35px"/>
+                <Icon icon="gridicons:dropdown" color='white' width="30px" height="30px"/>
             </UserContainer>
             {dropdown ? <UserDropdown/> : null}
         </HeaderContainer>
