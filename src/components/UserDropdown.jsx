@@ -6,7 +6,7 @@ const UserChoice = [
     {
         id: 1,
         icon: "mdi:account-circle",
-        name: "Profile",
+        name: "Your Profile",
         link: "/app/profile"
     },
     {
@@ -36,7 +36,7 @@ const UserChoice = [
     {
         id: 2,
         icon: "mdi:logout-variant",
-        name: "Logout",
+        name: "Sing Out",
         link: "/app/logout"
     }
 ]
@@ -58,19 +58,54 @@ const Container = styled.div`
 `
 
 const Option = styled.div`
-    font-family: "Poppins", sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
     display: flex;
-    justify-content: space-between;
+    padding-left: 15px;
+    padding-right: 30px;
+    padding-top: 7px;
+    padding-bottom: 7px;
     align-items: center;
+    justify-content: left;
     cursor: pointer;
-    padding: 10px 20px;
+    opacity: 0.6;
     border-bottom: 1px solid hsla(0, 0%, 65%, 0.158);
     &:hover {
-        background-color: hsla(0, 0%, 65%, 0.158);
+        background-color: hsla(229, 100%, 59%, 1);
+        opacity: 1;
     }
 `
 
-const User = styled.div``
+const User = styled.div`
+    font-family: 'Roboto', sans-serif;
+    opacity: 0.6;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-size: 0.9rem;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+`
+
+const Name = styled.div`
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    justify-content: left;
+    padding-left: 10px;
+    padding-bottom: 5px;
+`
+
+const ChoiceName = styled.h4`
+    margin: 0;
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    padding-left: 12px;
+    
+`
 
 const UserDropdown = () => {
 
@@ -80,12 +115,13 @@ const UserDropdown = () => {
     return (
         <Container>
             <User>
-                Loggato come <span>{nameCookie}</span>
+                Loggato come
             </User>
+            <Name>{nameCookie}</Name>
             {UserChoice.map(choice => (
                 <Option key={choice.id}>
-                    <Icon icon={choice.icon}/>
-                    {choice.name}
+                    <Icon icon={choice.icon} width="24px" height="24px"/>
+                    <ChoiceName>{choice.name}</ChoiceName>
                 </Option>
             ))}
         </Container>

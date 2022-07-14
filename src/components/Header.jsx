@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { openDropdown } from '../app/app';
 import { useEffect } from 'react';
 import UserDropdown from './UserDropdown';
+import { Icon } from '@iconify/react';
 
 
 const Title = styled.span`
@@ -35,7 +36,6 @@ const Propic = styled.img`
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    margin-right: 40px;
     box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.2);
     border: 3px solid hsla(0, 0%, 65%, 0.158);
 
@@ -43,6 +43,13 @@ const Propic = styled.img`
         width: 45px;
         height: 45px;
     }
+`
+
+const UserContainer = styled.div`
+    margin-right: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 `
 
 
@@ -55,7 +62,10 @@ const Header = () => {
     return(
         <HeaderContainer>
             <Title> Landrigram </Title>
-            <Propic src={imgCookie} onClick={(e) => {dispatch(openDropdown(e))}}/>
+            <UserContainer onClick={(e) => {dispatch(openDropdown(e))}}>
+                <Propic src={imgCookie}/>
+                <Icon icon="gridicons:dropdown" color='white' width="35px" height="35px"/>
+            </UserContainer>
             {dropdown ? <UserDropdown/> : null}
         </HeaderContainer>
     )
