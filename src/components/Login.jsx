@@ -232,13 +232,13 @@ const Login = () => {
         if (isAuth) {
             bake_cookie("img", img)
             bake_cookie("name", name)
-            navigate('/app')
+            navigate('app')
         }
     }, [isAuth])
 
     useEffect (() => {
         if (nameCookie.length > 0) {
-            navigate('/app')
+            navigate('app')
         }
     }, [])
 
