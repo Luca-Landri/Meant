@@ -52,6 +52,13 @@ const UserContainer = styled.div`
     align-items: center;
 `
 
+const DropdownIcon = styled(Icon)`
+    :hover {
+        cursor: pointer;
+        opacity: 0.6;
+    }
+`
+
 
 const Header = () => {
 
@@ -64,7 +71,7 @@ const Header = () => {
             <Title> Landrigram </Title>
             <UserContainer onClick={(e) => {dispatch(openDropdown(e))}}>
                 <Propic src={imgCookie}/>
-                <Icon icon="gridicons:dropdown" color='white' width="30px" height="30px"/>
+                <DropdownIcon icon="gridicons:dropdown" color='white' width="30px" height="30px"/>
             </UserContainer>
             {dropdown ? <UserDropdown/> : null}
         </HeaderContainer>
