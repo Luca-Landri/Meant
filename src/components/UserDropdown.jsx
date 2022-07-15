@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { Icon } from '@iconify/react';
 import { read_cookie } from 'sfcookies';
+import { useSelector, useDispatch } from 'react-redux';
+import { setFormOpened, openDropdown } from '../app/app';
 
 const UserChoice = [
     {
@@ -110,6 +112,8 @@ const ChoiceName = styled.h4`
 const UserDropdown = () => {
 
     const nameCookie = read_cookie("name")
+    const form = useSelector(state => state.app.formOpened)
+    const dispatch = useDispatch()
 
 
     return (
@@ -119,7 +123,12 @@ const UserDropdown = () => {
             </User>
             <Name>{nameCookie}</Name>
             {UserChoice.map(choice => (
-                <Option key={choice.id}>
+                <Option key={choice.id} onClick={() => {
+                        if (choice.name === "Upload") {
+                            dispatch(setFormOpened())
+                            dispatch(openDropdown())
+                        }
+                    }}>
                     <Icon icon={choice.icon} width="24px" height="24px"/>
                     <ChoiceName>{choice.name}</ChoiceName>
                 </Option>
