@@ -46,7 +46,7 @@ const NavbarRow = styled.div`
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
-    gap: 45px;
+    gap: 40px;
     padding: 10px;
 `
 
