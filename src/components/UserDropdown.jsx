@@ -57,6 +57,10 @@ const Container = styled.div`
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
     color: white;
+
+    @media (max-width: 768px) {
+        display: none;
+    }
 `
 
 const Option = styled.div`
