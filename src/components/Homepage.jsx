@@ -6,7 +6,16 @@ import UploadForm from './UploadForm';
 import { useEffect } from 'react';
 import { read_cookie, delete_cookie } from 'sfcookies';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
+const Title = styled.h1`
+    font-size: 30px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    color: #ffffff;
+    text-align: center;
+
+`
 
 
 const Homepage = () => {
@@ -18,7 +27,7 @@ const Homepage = () => {
     return (
         <div>
             <Header/>
-            <h1>HI {nameCookie}</h1>
+            <Title>HI {nameCookie}</Title>
 
             { openForm ? <UploadForm/> : null }
             
