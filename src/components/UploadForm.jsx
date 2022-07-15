@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ProgressBar from "./ProgressBar";
 import { getApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import styled from 'styled-components';
