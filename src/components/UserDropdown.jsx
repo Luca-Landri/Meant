@@ -45,12 +45,12 @@ const UserChoice = [
 
 const Container = styled.div`
     position: absolute;
-    top: 75px;
-    right: 20px;
-    border: 1px solid hsla(0, 0%, 65%, 0.158);
-    box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.2);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    top: 11%;
+    right: 35px;
+    box-shadow: -0.713381px 17.9859px 47px rgba(51, 38, 174, 0.13), -0.361149px 9.10534px 20.4891px rgba(51, 38, 174, 0.08775), -0.142676px 3.59717px 7.6375px rgba(51, 38, 174, 0.065), -0.0312104px 0.786881px 2.71719px rgba(51, 38, 174, 0.04225);
     border-radius: 10px;
-    backdrop-filter: blur(20px);
     z-index: 99;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -67,7 +67,8 @@ const Option = styled.div`
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     display: flex;
-    padding-left: 15px;
+    color: black;
+    padding-left: 30px;
     padding-right: 30px;
     padding-top: 7px;
     padding-bottom: 7px;
@@ -83,32 +84,35 @@ const Option = styled.div`
 `
 
 const User = styled.div`
-    font-family: 'Roboto', sans-serif;
+    color: black;
+    font-family: "M PLUS Rounded 1c", sans-serif;
     opacity: 0.6;
+    font-weight: 600;
     display: flex;
     justify-content: left;
     align-items: center;
     font-size: 0.9rem;
-    padding-left: 10px;
+    padding-left: 23px;
     padding-bottom: 5px;
     padding-top: 5px;
 `
 
 const Name = styled.div`
-    font-family: 'Roboto', sans-serif;
+    color: black;
+    font-family: "M PLUS Rounded 1c", sans-serif;
     font-weight: 700;
     font-size: 1rem;
     display: flex;
     justify-content: left;
-    padding-left: 10px;
+    padding-left: 25px;
     padding-bottom: 5px;
 `
 
 const ChoiceName = styled.h4`
     margin: 0;
     display: flex;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-weight: 600;
     padding-left: 12px;
     
 `
