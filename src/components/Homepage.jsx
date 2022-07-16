@@ -11,12 +11,11 @@ import { getStorage, ref, getDownloadURL, listAll  } from "firebase/storage";
 
 const Title = styled.h1`
     font-size: 30px;
-    font-family: "Poppins", sans-serif;
+    font-family: "M PLUS Rounded 1c", sans-serif;
     font-weight: 600;
-    color: #ffffff;
     text-align: center;
+    color: black;
 `
-
 
 const Homepage = () => {
     const openForm = useSelector ((state) => state.app.formOpened)
@@ -49,14 +48,6 @@ const Homepage = () => {
             <Title onClick={showImages}>HI {nameCookie}</Title>
 
             { openForm ? <UploadForm/> : null }
-
-            <div>
-                {images.map((image, index) => {
-                    return (
-                        <div>{image}</div>
-                    )
-                })}
-            </div>
             
             <Navbar/>
         </div>
