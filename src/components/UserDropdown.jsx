@@ -3,6 +3,7 @@ import { Icon } from '@iconify/react';
 import { read_cookie } from 'sfcookies';
 import { useSelector, useDispatch } from 'react-redux';
 import { setFormOpened, openDropdown } from '../app/app';
+import { motion } from "framer-motion"
 
 const UserChoice = [
     {
@@ -44,11 +45,10 @@ const UserChoice = [
 ]
 
 const Container = styled.div`
-    position: absolute;
+    position: relative;
+    z-index: 99;
     padding-top: 15px;
     padding-bottom: 15px;
-    top: 11%;
-    right: 35px;
     box-shadow: -0.713381px 17.9859px 47px rgba(51, 38, 174, 0.13), -0.361149px 9.10534px 20.4891px rgba(51, 38, 174, 0.08775), -0.142676px 3.59717px 7.6375px rgba(51, 38, 174, 0.065), -0.0312104px 0.786881px 2.71719px rgba(51, 38, 174, 0.04225);
     border-radius: 10px;
     z-index: 99;
@@ -63,7 +63,7 @@ const Container = styled.div`
     }
 `
 
-const Option = styled.div`
+const Option = styled(motion.div)`
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     display: flex;
@@ -77,9 +77,11 @@ const Option = styled.div`
     cursor: pointer;
     opacity: 0.6;
     border-bottom: 1px solid hsla(0, 0%, 65%, 0.158);
+    user-select: none;
     &:hover {
-        background-color: hsla(229, 100%, 59%, 1);
+        background-color: #DA4A4B;
         opacity: 1;
+        color: white;
     }
 `
 
@@ -117,6 +119,12 @@ const ChoiceName = styled.h4`
     
 `
 
+const IperContainer = styled(motion.div)`
+    position: absolute;
+    top: 11%;
+    right: 35px;
+`
+
 const UserDropdown = () => {
 
     const nameCookie = read_cookie("name")
@@ -125,23 +133,25 @@ const UserDropdown = () => {
 
 
     return (
-        <Container>
-            <User>
-                Loggato come
-            </User>
-            <Name>{nameCookie}</Name>
-            {UserChoice.map(choice => (
-                <Option key={choice.id} onClick={() => {
-                        if (choice.name === "Upload") {
-                            dispatch(setFormOpened())
-                            dispatch(openDropdown())
-                        }
-                    }}>
-                    <Icon icon={choice.icon} width="24px" height="24px"/>
-                    <ChoiceName>{choice.name}</ChoiceName>
-                </Option>
-            ))}
-        </Container>
+        <IperContainer>
+            <Container>
+                <User>
+                    Loggato come
+                </User>
+                <Name>{nameCookie}</Name>
+                {UserChoice.map(choice => (
+                    <Option  whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}key={choice.id} onClick={() => {
+                            if (choice.name === "Upload") {
+                                dispatch(setFormOpened())
+                                dispatch(openDropdown())
+                            }
+                        }}>
+                        <Icon icon={choice.icon} width="24px" height="24px"/>
+                        <ChoiceName>{choice.name}</ChoiceName>
+                    </Option>
+                ))}
+            </Container>
+        </IperContainer>
     )
 }
 
