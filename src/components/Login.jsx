@@ -7,215 +7,237 @@ import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import blob from '../../assets/blob.png'
+import task from '../../assets/task-check.png'
+import social from '../../assets/social.png'
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { bake_cookie, read_cookie } from 'sfcookies';
 
 const Container = styled.div`
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 70vh;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh; 
+
+    @media (max-width: 768px) {}
 `
 
-const LoginContainer = styled.div`
-    width: 40vw;
+const LoginTitle = styled.h1`
+    color: black;
+    margin-left: 50px;
+    font-weight: bold;
+    margin-right: 0;
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-size: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
 
     @media (max-width: 768px) {
-        width: 90vw;  
-        height: 45vh;
+        flex-direction: column;
+        font-size: 2rem;
+        margin-bottom: 50%;
+        margin-top: 0;
+        margin-left: 30px;
+    }
+
+`
+
+const FormContainer = styled.form`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: auto;
+    margin-left: auto;
+    gap: 20px;
+    margin-bottom: 15%;
+
+    @media (max-width: 768px) {
+
     }
 `
-const FormConteiner = styled.div`
+
+const LoginForm = styled.div`
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
     border: 1px solid hsla(0, 0%, 65%, 0.158);
     box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     backdrop-filter: blur(20px);
     z-index: 99;
-    padding: 2rem;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
+    padding: 50px 20px 0 20px;
 
     @media (max-width: 768px) {
         padding: 2rem;
         backdrop-filter: blur(0px);
         border: none;
+        border: none;
+        box-shadow: none;
+        width: 85%;
     }
 `
 
-const LoginText = styled.h2`
-    font-size: 2.3rem;
-    color: white;
-    font-family: "Poppins", sans-serif;
-    opacity: 0.6;
+const LoginText = styled.span`
+    font-size: 2.5rem;
+    margin: 0;
+    color: #DA4A4B;
+
+    @media (max-width: 768px) {
+        font-size: 2rem;
+    }
 `
 
 const Input = styled.input`
-    padding: 14.5px;
-    width: 100%;
-    margin: 1rem 0;
-    color: #ffffff;
-    outline: none;
-    background-color: #9191911f;
-    border: none;
-    border-radius: 5px;
-    font-weight: 500;
-    letter-spacing: 0.8px;
-    font-size: 15px;
-    backdrop-filter: blur(15px);
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    border: 1px solid #ccc;
+    width: 85%;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    padding: 10px;
+    box-sizing: border-box;
 
     @media (max-width: 768px) {
-        backdrop-filter: blur(0px);
-        
-    }
+        padding-bottom: 0;
+        padding-top: 0;
+        padding-right: 0;
+        width: 80%;
+        height: 50px;
+        margin-bottom: 10px;
+        padding-left: 10px;
+        font-size: 1rem;
 
+    }
 `
+
 
 const SubmitButton = styled.button`
-    background-image: linear-gradient(to right, #A149FA 0%, #ab62f5 50%, #c496f2 100%);
-    color: #ffffff;
-    padding: 13px;
-    border-radius: 5px;
-    outline: none;
-    font-size: 20px;
-    letter-spacing: 1.5px;
-    font-weight: bold;
-    width: 100%;
+    color: #FFFFFF;
     cursor: pointer;
-    margin-bottom: 2rem;
-    transition: all 0.1s ease-in-out;
-    border: none;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-    -webkit-transition: all 0.1s ease-in-out;
-    -moz-transition: all 0.1s ease-in-out;
-    -ms-transition: all 0.1s ease-in-out;
-    -o-transition: all 0.1s ease-in-out;
-`
-
-const LoginForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-`
-
-const SingGoogle = styled.button`
-    cursor: pointer;
-    background-image: #fff;
-    color: black;
-    padding: 13px;
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    box-shadow: #5E5DF0 0 10px 20px -10px;
+    background: #5E5DF0;
     border-radius: 10px;
-    outline: none;
-    font-size: 20px;
-    letter-spacing: 1.5px;
-    font-weight: bold;
-    width: 65%;
+    box-sizing: border-box;
+    border: 0;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    word-break: break-word;
+    font-size: 1.5rem;
+    font-weight: 600;
+    width: 85%;
+    padding: 10px;
+
+    @media (max-width: 768px) {
+        outline: 0 solid transparent;
+        user-select: none;
+        width: 80%;
+        padding: 12px;
+        margin-top: 10px;
+    }
+`
+const SingGoogle = styled.button`
+    font-weight: 700;
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    border: none;
+    background: black;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
-`
-
-
-const Circle1 = styled.div`
-    width: 8.5rem;
-    height: 8.5rem;
-    background: linear-gradient(to right, #A149FA 0%, #ab62f5 50%, #c496f2 100%);
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    position: relative;
-    top: 130px;
-    left: 0;
-    transform: translate(-45%, -45%);
-    -webkit-transform: translate(-45%, -45%);
-    -moz-transform: translate(-45%, -45%);
-    -ms-transform: translate(-45%, -45%);
-    -o-transform: translate(-45%, -45%);
+    box-shadow: #5E5DF0 0 10px 20px -10px;
+    width: 85%;
+    border-radius: 10px;
+    gap: 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 10px;
 
     @media (max-width: 768px) {
-        display: none;
+        margin-top: 20px;
+        width: 80%;
+        height: 60px;
+        font-size: 20px;
+        padding: 0;
+    }
+
+`
+
+const Register = styled.p`
+    font-size: 2rem;
+    margin: 0;
+
+    @media (max-width: 768px) {
+        font-size: 1rem;
     }
 `
 
-const SingUp = styled.span`
-    color: #fff;
-    font-family: "Poppins", sans-serif;
-    margin-top: 20px;
-    opacity: 0.6;
-`
-
-const Circle2 = styled.div`
-    width: 8rem;
-    height: 8rem;
-    background: linear-gradient(to right, #c496f2 0%, #ab62f5 50%, #A149FA 100%);
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    position: relative;
-    bottom: 110px;
-    right: -80%;
-    transform: translate(45%, 45%);
-    -webkit-transform: translate(45%, 45%);
-    -moz-transform: translate(45%, 45%);
-    -ms-transform: translate(45%, 45%);
-    -o-transform: translate(45%, 45%);
-
-    @media (max-width: 768px) {
-        display: none;
-    }
-`
-const Blob = styled.img`
+const Task = styled.img`
+    width: 10%;
     position: absolute;
-    left: 0;
-    bottom: 0;
-    transform: rotatey(180deg);
-    width: 20%;
-
+    right: 15%;
+    top: 15%;
+    transform: rotate(-25deg);
     @media (max-width: 768px) {
-        display: none;
+        width: 30%;
+        top: 20%;
+        left: 50%;
+        right: 0;
     }
 `
 
-const Register = styled(Link)`
-    color: #fff;
+const Social = styled.img`
+    width: 25%;
+    position: absolute;
+    top: 52%;
+
+    @media (max-width: 768px) {
+        width: 43%;
+        top: 37%;
+        left: 10%;
+
+    }
+
 `
 
-const Title = styled.span`
-    font-family: 'Pacifico', sans-serif;
-    color: white;
-    font-size: 2.2rem;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 30px;
+const Logo = styled.span`
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-size: 3rem;
+    margin: 0;
+    color: #6461F2;
+    font-weight: 800;
     cursor: pointer;
 
+    span {
+        color: #DA4A4B;
+    }
+
     @media (max-width: 768px) {
-        font-size: 1.5rem;
+        font-size: 2.5rem;
     }
 `
 
-const HeaderContainer = styled.div`
-    border-bottom: 1px solid hsla(0, 0%, 65%, 0.158);
+const Footer = styled.div`
     display: flex;
-    justify-content: left;
-    box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.2);
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-family: "M PLUS Rounded 1c", sans-serif;
+
+    @media (max-width: 768px) {
+        display: none;
+    }
 `
 
+const RegisterLink = styled(Link)`
+    color: #6461F2;
+`
 
 
 const Login = () => {
@@ -270,8 +292,38 @@ const Login = () => {
     }
 
     return (
-        <div>
-            <HeaderContainer>
+        <Container>
+            <LoginTitle>
+                <Logo>MEAN<span>T</span></Logo>
+                <div>
+                    Hey, <LoginText>Login Now!</LoginText>
+                    <Register>If you are new / <RegisterLink to="/register">Create New</RegisterLink></Register>
+                </div>
+            </LoginTitle>
+            <Task src={task} alt="ciao" />
+            <Social src={social}/>
+
+            <LoginForm>
+                <FormContainer>
+                    <Input type="text" name="email" placeholder="Email" onChange={(e) => handleEmail(e)}/>
+                    <Input type="password" name="password" placeholder="Password" onChange={(e) => handlePassword(e)}/>
+                    <SubmitButton onClick={(e) => normalSingIn(e)}>Accedi</SubmitButton>
+                    <SingGoogle onClick={(e) => gogleSingIn(e)}>Accedi con <Icon icon="logos:google-icon" width="40" height="40" /></SingGoogle>
+                </FormContainer>
+            </LoginForm>
+
+            <Footer>
+                <ToastContainer icon={true} newestOnTop={true} theme="dark" />
+                <p>© 2022 Meant. All rights reserved.</p>
+            </Footer>
+        </Container>
+    )
+}
+
+export default Login
+
+
+{/* <HeaderContainer>
                 <Title> Landrigram </Title>
             </HeaderContainer>
             <Container>
@@ -288,12 +340,6 @@ const Login = () => {
                         <SingUp>Oppure  <Register to="/register">Registrati</Register></SingUp>
                     </LoginForm>
                 </FormConteiner>
-                <Circle2></Circle2>
             </LoginContainer>
-            <Blob src={blob} alt="" />
-            </Container>
-        </div>
-    )
-}
+            </Container> */}
 
-export default Login
