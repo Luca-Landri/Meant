@@ -8,8 +8,9 @@ import { Icon } from '@iconify/react';
 
 
 const Title = styled.span`
-    font-family: 'Pacifico', sans-serif;
-    color: white;
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-weight: 700;
+    color: #6461F2;
     font-size: 2.2rem;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -17,31 +18,29 @@ const Title = styled.span`
     cursor: pointer;
 
     @media (max-width: 768px) {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 `
 
 const HeaderContainer = styled.div`
-    border-bottom: 1px solid hsla(0, 0%, 65%, 0.158);
-    display: flex;
-    justify-content: left;
-    box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 2%;
 `
 
 const Propic = styled.img`
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
     box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.2);
     border: 3px solid hsla(0, 0%, 65%, 0.158);
 
     @media (max-width: 768px) {
-        width: 45px;
-        height: 45px;
+        width: 55px;
+        height: 55px;
     }
 `
 
@@ -57,6 +56,9 @@ const DropdownIcon = styled(Icon)`
         cursor: pointer;
         opacity: 0.6;
     }
+    @media (max-width: 768px) {
+        display: none;
+    }
 `
 
 
@@ -68,10 +70,10 @@ const Header = () => {
     
     return(
         <HeaderContainer>
-            <Title> Landrigram </Title>
+            <Title> MEANT </Title>
             <UserContainer onClick={(e) => {dispatch(openDropdown(e))}}>
                 <Propic src={imgCookie}/>
-                <DropdownIcon icon="gridicons:dropdown" color='white' width="30px" height="30px"/>
+                <DropdownIcon icon="gridicons:dropdown" color='black' width="30px" height="30px"/>
             </UserContainer>
             {dropdown ? <UserDropdown/> : null}
         </HeaderContainer>
