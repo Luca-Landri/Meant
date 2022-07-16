@@ -5,9 +5,9 @@ import { openDropdown } from '../app/app';
 import { useEffect } from 'react';
 import UserDropdown from './UserDropdown';
 import { Icon } from '@iconify/react';
+import { motion } from "framer-motion"
 
-
-const Title = styled.span`
+const Title = styled(motion.span)`
     font-family: "M PLUS Rounded 1c", sans-serif;
     font-weight: 700;
     color: #6461F2;
@@ -28,7 +28,11 @@ const HeaderContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-top: 2%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    box-shadow: -0.713381px 17.9859px 47px rgba(51, 38, 174, 0.13), -0.361149px 9.10534px 20.4891px rgba(51, 38, 174, 0.08775), -0.142676px 3.59717px 7.6375px rgba(51, 38, 174, 0.065), -0.0312104px 0.786881px 2.71719px rgba(51, 38, 174, 0.04225);
+    border-radius: 0 0 15px 15px;
+    
 `
 
 const Propic = styled.img`
@@ -70,7 +74,21 @@ const Header = () => {
     
     return(
         <HeaderContainer>
-            <Title> MEANT </Title>
+            <Title style={{
+                    borderRadius: 30,
+                    backgroundColor: "#fff",
+                    cursor: "grab",
+                }}
+                drag
+                dragConstraints={{
+                    top: -12,
+                    right: 12,
+                    bottom: 12,
+                    left: -12,
+                }}
+                dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
+                dragElastic={0.5}
+                whileTap={{ cursor: "grabbing" }}> MEANT </Title>
             <UserContainer onClick={(e) => {dispatch(openDropdown(e))}}>
                 <Propic src={imgCookie}/>
                 <DropdownIcon icon="gridicons:dropdown" color='black' width="30px" height="30px"/>
