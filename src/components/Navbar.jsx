@@ -16,13 +16,13 @@ const NavbarIcons = [
     },
     {
         id: 3,
-        icon: "bx:user",
-        name: "Profile",
+        icon: "bx:game",
+        name: "Quiz",
     },
     {
         id: 4,
-        icon: "bx:cog",
-        name: "Settings",
+        icon: "bx:user",
+        name: "Profile",
     }
 ]
 
@@ -40,7 +40,7 @@ const Container = styled.div`
 const NavbarRow = styled.div`
     background-color: #5E5DF0;
     width: 85%;
-    border-radius: 30px;
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,9 +51,9 @@ const NavbarRow = styled.div`
 `
 
 const Name = styled.div`
-    font-family: 'Roboto', sans-serif;
+    font-family: "M PLUS Rounded 1c", sans-serif;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 12px;
     color: white;
 `
 
