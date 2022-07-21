@@ -22,10 +22,7 @@ export const signInGoogle = createAsyncThunk('signInGoogle', async (arg, {reject
     return signInWithPopup(getAuth(), provider).then(res => {
       return res.user
     }).catch (err => {
-      return rejectWithValue({
-            status: err.code,
-            message: err.message
-        })
+      return rejectWithValue({error: err})
     })
 })
 
