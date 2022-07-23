@@ -25,7 +25,7 @@ const Row = styled.div`
 const WordCardGroup = () => {
   return (
     <Container>
-      <Title>Word Cards</Title>
+      <Title>Daily Words 🌍</Title>
       <Row>
         <WordCard />
         <WordCard />
