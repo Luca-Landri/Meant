@@ -27,7 +27,7 @@ const initialState = {
   formOpened: false,
   dropdown: false,
   words: [],
-  def: "",
+  def: [],
 }
 
 export const appSlice = createSlice({
@@ -48,12 +48,10 @@ export const appSlice = createSlice({
 
   extraReducers: (builder) => {
     builder.addCase(randomWord.fulfilled, (state, action) => {
-      console.log(action.payload)
       state.words = action.payload
     }),
 
     builder.addCase(definition.fulfilled, (state, action) => {
-      console.log(action.payload)
       state.def = action.payload
     })
   }
@@ -61,17 +59,3 @@ export const appSlice = createSlice({
 
 export default appSlice.reducer
 export const { setFormOpened, openDropdown, setWords } = appSlice.actions
-
-
-// return fetch(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word[0]}?key=2bb1414e-0add-45aa-9ac2-4931332480e8`)
-//         .then(res => {
-//           return res.json()
-//           .then(json => json[0])
-//           .then(json => {
-
-//           return json.shortdef[0]
-//         })
-//         }).catch(err => {
-//           return rejectWithValue({error: err})
-//         })
-//     })
