@@ -1,0 +1,18 @@
+Trasportare tutte le funzioni di login in redux
+scaricare immagine default
+salvare nei cookie l'id quando ti vai a loggare e poi da quello andare a prendere immagine di profilo e nome
+mettere useEffect che ti vede la cookie session
+commentare tutto il codice
+
+
+/UI
+Controllare un sacco di cose sul file
+Dropdown che devi segnalare qwual'è quella attiva
+attento al coso della lingua di chrome che traduce
+
+DESCTRIZIONE APP: MEANT
+con MEANT tu puoi mettere i termini nuovi che impari e poi puoi fare dei quiz dove avrai il termine e dovrai trovare la definizione
+
+
+
+

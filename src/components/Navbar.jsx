@@ -31,6 +31,7 @@ const Container = styled.div`
     position: absolute;
     bottom: 15px;
     width: 100%;
+    
 
     @media (min-width: 768px) {
         display: none;
@@ -64,6 +65,14 @@ const Option = styled.div`
     flex-direction: column;
 `
 
+const Fix = styled.div`
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+`
+
 
 
 const Navbar = () => {
@@ -72,6 +81,7 @@ const Navbar = () => {
     const formOpened = useSelector((state) => state.app.formOpened)
 
     return (
+        <Fix>
         <Container>
             <NavbarRow>
                 {NavbarIcons.map((icon) => {
@@ -96,6 +106,7 @@ const Navbar = () => {
                 })}
             </NavbarRow>
         </Container>
+        </Fix>
     )
 }
 

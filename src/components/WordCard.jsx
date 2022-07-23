@@ -6,6 +6,49 @@ import { useEffect } from 'react';
 import { randomWord, definition } from '../app/app';
 
 
+const FlipCard = styled.div`
+    background-color: transparent;
+    width: 330px;
+    height: 300px;
+    perspective: 1000px;
+    margin-right: 50px;
+`
+
+const CardFront = styled.div`
+    background-color: #bbb;
+    color: #fff;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    background: rgb(135, 140, 244);
+    background: linear-gradient(90deg, rgba(135, 140, 244, 1) 0%, rgba(89, 95, 209, 1) 100%, rgba(173, 201, 8, 0.30155812324929976) 100%);
+`
+
+const CardBack = styled.div`
+    background-color: dodgerblue;
+    color: white;
+    transform: rotateY(180deg);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+        font-size: 25px;
+        font-family: "M PLUS Rounded 1c", sans-serif;
+    }
+
+    h2 {
+        font-size: 15px;
+        font-family: "M PLUS Rounded 1c", sans-serif;
+    }
+`
+
 
 const WordCard = () => {
     const word = useSelector((state) => state.app.words)
@@ -31,17 +74,17 @@ const WordCard = () => {
     }
     
     return (
-        <div className="flip-card">
+        <FlipCard className="flip-card">
             <div className="flip-card-inner">
-                <div className="flip-card-front">
+                <CardFront className="flip-card-front">
                     <h1>{word}</h1>
-                </div>
-                <div className="flip-card-back">
+                </CardFront>
+                <CardBack className="flip-card-back">
                     <h1>{word}</h1>
                     <h2>{Word ? def[0].shortdef[0] : null}</h2>
-                </div>
+                </CardBack>
             </div>
-        </div>
+        </FlipCard>
     )
 }
 
