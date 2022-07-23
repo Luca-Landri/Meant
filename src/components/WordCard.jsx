@@ -26,10 +26,18 @@ const CardFront = styled.div`
     font-family: "M PLUS Rounded 1c", sans-serif;
     background: rgb(135, 140, 244);
     background: linear-gradient(90deg, rgba(135, 140, 244, 1) 0%, rgba(89, 95, 209, 1) 100%, rgba(173, 201, 8, 0.30155812324929976) 100%);
+    
+    p {
+        color: #fff;
+        opacity: 0.6;
+        font-size: 18px;
+    }
+
 `
 
 const CardBack = styled.div`
-    background-color: dodgerblue;
+    background: rgb(123,98,187);
+    background: linear-gradient(90deg, rgba(123,98,187,1) 0%, rgba(223,90,114,1) 100%, rgba(173,201,8,0.30155812324929976) 100%);
     color: white;
     transform: rotateY(180deg);
     border-radius: 15px;
@@ -47,6 +55,15 @@ const CardBack = styled.div`
         font-size: 15px;
         font-family: "M PLUS Rounded 1c", sans-serif;
     }
+`
+
+const CardInner = styled.div`
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.5s;
+    transform-style: preserve-3d; 
 `
 
 
@@ -75,15 +92,16 @@ const WordCard = () => {
     
     return (
         <FlipCard className="flip-card">
-            <div className="flip-card-inner">
+            <CardInner className="flip-card-inner">
                 <CardFront className="flip-card-front">
                     <h1>{word}</h1>
+                    <p>Hover this card for the meaning</p>
                 </CardFront>
                 <CardBack className="flip-card-back">
                     <h1>{word}</h1>
                     <h2>{Word ? def[0].shortdef[0] : null}</h2>
                 </CardBack>
-            </div>
+            </CardInner>
         </FlipCard>
     )
 }
