@@ -1,6 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import WordCard from './WordCard'
+import { randomWord, definition } from '../app/app';
+import { useSelector, useDispatch } from 'react-redux';
+
+
 
 
 const Container = styled.div`
@@ -23,13 +27,19 @@ const Row = styled.div`
 `
 
 const WordCardGroup = () => {
+  const word = useSelector((state) => state.app.words)
+  const dispatch = useDispatch()
+
+  
   return (
     <Container>
-      <Title>Daily Words 🌍</Title>
+      <Title onClick={() => dispatch(randomWord())}>Daily Words 🌍</Title>
       <Row>
-        <WordCard />
-        <WordCard />
-        <WordCard />
+        {
+          word.map((word, index) => {
+            return <WordCard key={index} word={word} index={index}/>
+          })
+        }
       </Row>
     </Container>
   )
